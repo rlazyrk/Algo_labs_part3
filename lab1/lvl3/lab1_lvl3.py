@@ -42,7 +42,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(left, 3)
         self.assertEqual(right,9)
     
-    def test_full_same_list(self):
+    def test_full_identical_list(self):
         test_list = [7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7]
         left,right = find_unsorted_part(test_list)
         self.assertEqual(left, -1)
