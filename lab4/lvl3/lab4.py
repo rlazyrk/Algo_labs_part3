@@ -1,4 +1,8 @@
-def read_from_file(file_name: str):
+def read_from_file(file_name: str) -> tuple:
+    """
+    :param file_name:
+    :return: tuple with board_side, start point, destination point
+    """
     with open(file_name, "r") as file:
         n = int(file.readline().strip())
         print(n)
@@ -9,7 +13,13 @@ def read_from_file(file_name: str):
     return n, start, destination
 
 
-def find_min_knight_path(board_side: int, start: tuple, destination: tuple):
+def find_min_knight_path(board_side: int, start: tuple, destination: tuple) -> int:
+    """
+    :param board_side:
+    :param start:
+    :param destination:
+    :return: lenght of knight`s path from one point to another
+    """
     row = [2, 2, -2, -2, 1, 1, -1, -1]
     col = [-1, 1, 1, -1, 2, -2, 2, -2]
     counter = 0
@@ -29,9 +39,14 @@ def find_min_knight_path(board_side: int, start: tuple, destination: tuple):
                 visited.add((k, l))
 
 
-def write_to_file(number: int)-> None:
-    with open("output.txt","w") as file:
+def write_to_file(number: int) -> None:
+    """
+    :param number:
+    write number to file.txt
+    """
+    with open("output.txt", "w") as file:
         file.write(str(number))
+
 
 n, start, end = read_from_file('input.txt')
 print(find_min_knight_path(n, start, end))
