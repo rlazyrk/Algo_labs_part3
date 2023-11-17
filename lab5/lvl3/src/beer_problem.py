@@ -34,6 +34,7 @@ def beer_combinations(num_people: int, num_beer_types: int, beer_matrix: list) -
     :param beer_matrix:
     :return: list with beers combination
     """
+
     def satisfies_all(possible_combination: list) -> bool:
         """
         Helpful func to check that combination satisfies all people
@@ -41,7 +42,13 @@ def beer_combinations(num_people: int, num_beer_types: int, beer_matrix: list) -
         :return: True of False
         """
         for person_index in range(num_people):
-            if sum(beer_matrix[beer_type][person_index] for beer_type in possible_combination) < 1:
+            if (
+                sum(
+                    beer_matrix[beer_type][person_index]
+                    for beer_type in possible_combination
+                )
+                < 1
+            ):
                 return False
         return True
 
@@ -76,7 +83,9 @@ def write_to_file(answer: int, file_mame: str) -> None:
         file.write(str(answer))
 
 
-def beer_problem_answer(num_people: int, num_beer_types: int, beer_preferences: list) -> int:
+def beer_problem_answer(
+    num_people: int, num_beer_types: int, beer_preferences: list
+) -> int:
     """
     Func solution of beer problem
     :param num_people:
@@ -84,7 +93,7 @@ def beer_problem_answer(num_people: int, num_beer_types: int, beer_preferences: 
     :param beer_preferences:
     :return: number of min beer types that have to buyed
     """
-    answer = float('inf')
+    answer = float("inf")
     for combination in beer_combinations(
         num_people,
         num_beer_types,

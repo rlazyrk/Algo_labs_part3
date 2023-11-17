@@ -4,7 +4,6 @@ from lab5.lvl3.src.beer_problem import beer_problem_answer
 
 
 class BeerProblemTest(unittest.TestCase):
-
     def test_from_task(self):
         num_people = 6
         num_beer_type = 3
