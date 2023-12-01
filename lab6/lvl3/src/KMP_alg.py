@@ -1,5 +1,5 @@
-def kmp(haystack, needle):
-    pi = find_pi(needle)
+def knuth_morris_prat(haystack, needle):
+    prefix = build_prefix(needle)
     needle_index = 0
     haystack_index = 0
     result = []
@@ -7,32 +7,32 @@ def kmp(haystack, needle):
         if needle[needle_index] == haystack[haystack_index]:
             haystack_index += 1
             needle_index += 1
-        if needle_index == len(needle):
-            result.append(haystack_index - needle_index)
-            needle_index = pi[needle_index - 1]
-        elif (
-            haystack_index < len(haystack)
-            and needle[needle_index] != haystack[haystack_index]
-        ):
-            if needle_index != 0:
-                needle_index = pi[needle_index - 1]
-            else:
-                haystack_index += 1
+            if needle_index == len(needle):
+                result.append(haystack_index - needle_index)
+                needle_index = prefix[needle_index - 1]
+        elif check_miss_math_needle_not_zero(needle, needle_index, haystack, haystack_index):
+            needle_index = prefix[needle_index - 1]
+        else:
+            haystack_index += 1
     return result
 
 
-def find_pi(pattern):
-    pi = [0] * len(pattern)
+def build_prefix(pattern):
+    prefix = [0] * len(pattern)
     start = 0
     end = 1
     while end < len(pattern):
         if pattern[end] != pattern[start] and start == 0:
-            pi[end] = 0
+            prefix[end] = 0
             end += 1
         if pattern[end] != pattern[start] and start != 0:
-            start = pi[start - 1]
+            start = prefix[start - 1]
         if pattern[end] == pattern[start]:
-            pi[end] = start + 1
+            prefix[end] = start + 1
             end += 1
             start += 1
-    return pi
+    return prefix
+
+
+def check_miss_math_needle_not_zero(needle, needle_index, haystack, haystack_index):
+    return needle[needle_index] != haystack[haystack_index] and needle_index != 0
